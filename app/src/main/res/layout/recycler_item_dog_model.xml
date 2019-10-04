@@ -17,10 +17,10 @@
       android:id="@+id/dog_image"
       imageResource="@{dogModel.imageResId}"
       android:layout_width="match_parent"
-      android:layout_height="match_parent"
+      android:layout_height="150dp"
       android:adjustViewBounds="true"
       android:contentDescription="@null"
-      android:scaleType="centerInside" />
+      android:scaleType="fitStart" />
 
     <TextView
       android:id="@+id/name"

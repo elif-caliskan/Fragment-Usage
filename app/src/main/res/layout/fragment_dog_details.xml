@@ -50,27 +50,6 @@
           android:text="@{dogModel.text}" />
 
     </LinearLayout>
-    <LinearLayout
-        android:id="@+id/buttonsLayout"
-        android:layout_alignParentBottom="true"
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent"
-        android:visibility="visible">
 
-    <Button
-        android:id="@+id/prevButton"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:layout_width="0dp"
-        android:text="Prev"/>
-
-    <Button
-        android:id="@+id/nextButton"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:layout_width="0dp"
-        android:text="Next"/>
-
-    </LinearLayout>
   </RelativeLayout>
 </layout>

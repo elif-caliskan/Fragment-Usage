@@ -12,7 +12,6 @@ class DogPagerAdapter(fragmentManager: FragmentManager, private val dogList: Arr
     override fun getItem(position: Int): Fragment {
         return DogDetailsFragment.newInstance(dogList[position % dogList.size])
     }
-
     // 3
     override fun getCount(): Int {
         return dogList.size * MAX_VALUE

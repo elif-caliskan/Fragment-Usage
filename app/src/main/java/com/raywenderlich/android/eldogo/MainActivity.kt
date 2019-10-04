@@ -1,38 +1,26 @@
 package com.raywenderlich.android.eldogo
 
+import android.content.Intent
 import android.os.Bundle
-import android.support.v4.view.ViewPager
+import android.support.design.widget.CollapsingToolbarLayout
+import android.support.v4.app.FragmentActivity
 import android.support.v7.app.AppCompatActivity
-import com.nshmura.recyclertablayout.RecyclerTabLayout
+import android.support.v7.widget.Toolbar
+
+import android.widget.ImageView
+
 
 class MainActivity : AppCompatActivity(),
     DogListFragment.OnDogSelected {
-    private lateinit var viewPager: ViewPager
-    private lateinit var pagerAdapter: DogPagerAdapter
-    private lateinit var recyclerTabLayout: RecyclerTabLayout
-    private lateinit var imageResIds: IntArray
-    private lateinit var names: Array<String>
-    private lateinit var descriptions: Array<String>
-    private lateinit var urls: Array<String>
-    private var dogModels:  ArrayList<DogModel> = arrayListOf<DogModel>()
-
-        override fun onCreate(savedInstanceState: Bundle?) {
+    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
                 setContentView(R.layout.activity_main)
 
-            names = resources.getStringArray(R.array.names)
-            descriptions = resources.getStringArray(R.array.descriptions)
-            urls = resources.getStringArray(R.array.urls)
-            val typedArray = resources.obtainTypedArray(R.array.images)
-            val imageCount = names.size
-            imageResIds = IntArray(imageCount)
-            for (i in 0 until imageCount) {
-                imageResIds[i] = typedArray.getResourceId(i, 0)
-                val dog  = DogModel(imageResIds[i], names[i], descriptions[i], urls[i])
-                dogModels.add(dog)
-            }
-            typedArray.recycle()
+        val toolbar: Toolbar = findViewById(R.id.toolbar)
+        setSupportActionBar(toolbar)
 
+        val collapsingToolbar:CollapsingToolbarLayout = findViewById(R.id.collapsing_toolbar)
+        collapsingToolbar.setTitle("Dog Species")
             // 1
         if (savedInstanceState == null) {
             // 2
@@ -46,15 +34,9 @@ class MainActivity : AppCompatActivity(),
         }
     }
     override fun onDogSelected(position: Int) {
-        // 1
-        val detailsFragment =
-            DogDetailsFragment.newInstance(dogModels[position])
-        supportFragmentManager
-            .beginTransaction()
-            // 2
-            .replace(R.id.root_layout, detailsFragment, "dogDetails")
-            // 3
-            .addToBackStack(null)
-            .commit()
+        intent = Intent(applicationContext, DogDetailActivity::class.java)
+        intent.putExtra("position",position)
+        startActivity(intent)
     }
+
 }
