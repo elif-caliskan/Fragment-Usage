@@ -20,7 +20,6 @@ class DogListFragment : Fragment() {
   private lateinit var listener: OnDogSelected
 
   companion object {
-
     fun newInstance(): DogListFragment {
       return DogListFragment()
     }
@@ -41,7 +40,7 @@ class DogListFragment : Fragment() {
           descriptions[position], urls[position])
       viewHolder.setData(dog)
       viewHolder.itemView.setOnClickListener {
-        listener.onDogSelected(dog)
+        listener.onDogSelected(position)
       }
     }
 
@@ -94,7 +93,6 @@ class DogListFragment : Fragment() {
     return view
   }
   interface OnDogSelected {
-    fun onDogSelected(dogModel: DogModel)
+    fun onDogSelected(position: Int)
   }
-
 }

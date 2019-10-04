@@ -6,6 +6,8 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.raywenderlich.android.eldogo.databinding.FragmentDogDetailsBinding
+
 
 //1
 class DogDetailsFragment : Fragment() {
@@ -13,8 +15,14 @@ class DogDetailsFragment : Fragment() {
   //2
   companion object {
 
-    fun newInstance(): DogDetailsFragment {
-      return DogDetailsFragment()
+    private const val DOGMODEL = "model"
+
+    fun newInstance(dogModel: DogModel): DogDetailsFragment {
+      val args = Bundle()
+      args.putSerializable(DOGMODEL, dogModel)
+      val fragment = DogDetailsFragment()
+      fragment.arguments = args
+      return fragment
     }
   }
 
@@ -22,7 +30,17 @@ class DogDetailsFragment : Fragment() {
   override fun onCreateView(inflater: LayoutInflater,
                             container: ViewGroup?,
                             savedInstanceState: Bundle?): View? {
-    return inflater.inflate(R.layout.fragment_dog_details, container, false)
+    // 1
+    val fragmentDogDetailsBinding =
+      FragmentDogDetailsBinding.inflate(inflater, container, false)
+
+// 2
+    val model = arguments!!.getSerializable(DOGMODEL) as DogModel
+// 3
+    fragmentDogDetailsBinding.dogModel = model
+    model.text = String.format(getString(R.string.description_format),
+      model.description, model.url)
+    return fragmentDogDetailsBinding.root
   }
 
 }
